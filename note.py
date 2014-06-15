@@ -130,7 +130,7 @@ class Note(object):
         to provide authenticated encryption ( encrypt then mac ). No private keys
         are stored on the server."""
     
-        plain = zlib.compress(self.plaintext.encode('utf-8'))
+        plain = self.plaintext.encode('utf-8')
         if self.passphrase is not None:
             open(self.path('key'), 'a').close() # empty file
     
@@ -163,10 +163,7 @@ class Note(object):
         for x, y in zip(tag, tag2):
             hmac_check |= ord(x) ^ ord(y)
         if hmac_check == 0:
-            try:
-                self.plaintext = zlib.decompress(plaintext).decode('utf-8')
-            except zlib.error:
-                return False
+            self.plaintext =plaintext
         else: 
             return False
         return True
