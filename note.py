@@ -33,6 +33,9 @@ class Note(object):
     dkey = None     # Duress passphrase
     plaintext = None    # Plain text note
     ciphertext = None   # Encrypted text
+    padding = None # additional padding to hide note size
+    has_passphrase = False # set to True if the note has a user passphrase
+    has_duress = False # set to True if the note has a duress key
 
     def __init__(self,url=None):
         if url is None:
